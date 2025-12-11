@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Home Page</title>
+  <link rel="icon" type="image/png" href="https://ik.imagekit.io/onr1ufd7e/Black%20and%20White%20Initial%20Z%20Corporate%20Logo%20(4)-Photoroom.png?updatedAt=1764829551324">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0000FF", /* Changed to pure blue */
+            "background-light": "#212121", /* Updated to requested color */
+            "background-dark": "#212121", /* Updated to requested color */
+          },
+          fontFamily: {
+            "display": ["Spline Sans", "sans-serif"],
+            "body": ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+  <style>
+    /* Security measures - Prevent image downloading */
+    img {
+      /* Prevent right-click context menu */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Prevent image dragging */
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+      /* Prevent image saving via context menu */
+      pointer-events: none;
+    }
+    
+    /* Prevent text selection */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Prevent image dragging */
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+    }
+    
+    /* From Uiverse.io by EddyBel */
+    .input__container {
+      max-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 15px;
+      border-radius: 30px !important; /* Increased roundness - using !important to prevent override */
+      position: relative;
+    }
+
+    .input__container::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      filter: blur(25px);
+      border-radius: 30px !important; /* Increased roundness - using !important to prevent override */
+      background-color: #e499ff;
+      background-image: radial-gradient(at 47% 69%, hsla(17,62%,65%,1) 0px, transparent 50%),
+    radial-gradient(at 9% 32%, hsla(222,75%,60%,1) 0px, transparent 50%);
+    }
+
+    .input__label {
+      display: block;
+      margin-left: 0.4em;
+      color: #000;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    .input__description {
+      font-size: 0.6em;
+      font-weight: bold;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .input {
+      border: none;
+      outline: none;
+      width: 100%;
+      padding: 0.6em;
+      padding-left: 0.9em;
+      border-radius: 30px !important; /* Increased roundness - using !important to prevent override */
+      background: #fff;
+      transition: background 300ms, color 300ms;
+    }
+
+    .input:hover,.input:focus {
+      background: rgb(0, 0, 0);
+      color: #fff;
+    }
+    
+    /* Newton's Cradle Animation */
+    .newtons-cradle {
+      --uib-size: 50px;
+      --uib-speed: 1.2s;
+      --uib-color: #ffffff;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--uib-size);
+      height: var(--uib-size);
+    }
+
+    .newtons-cradle__dot {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 25%;
+      transform-origin: center top;
+    }
+
+    .newtons-cradle__dot::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 25%;
+      border-radius: 50%;
+      background-color: var(--uib-color);
+    }
+
+    .newtons-cradle__dot:first-child {
+      animation: swing var(--uib-speed) linear infinite;
+    }
+
+    .newtons-cradle__dot:last-child {
+      animation: swing2 var(--uib-speed) linear infinite;
+    }
+
+    @keyframes swing {
+      0% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-out;
+      }
+
+      25% {
+        transform: rotate(70deg);
+        animation-timing-function: ease-in;
+      }
+
+      50% {
+        transform: rotate(0deg);
+        animation-timing-function: linear;
+      }
+    }
+
+    @keyframes swing2 {
+      0% {
+        transform: rotate(0deg);
+        animation-timing-function: linear;
+      }
+
+      50% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-out;
+      }
+
+      75% {
+        transform: rotate(-70deg);
+        animation-timing-function: ease-in;
+      }
+    }
+
+    /* Animation overlay */
+    .animation-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+
+    .animation-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .animation-text {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    
+    /* Modern popup styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background-color: #ffffff;
+      color: #333333;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 90%;
+      width: 400px;
+      font-family: 'Spline Sans', sans-serif;
+    }
+
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .popup-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .popup-close {
+      background: none;
+      border: none;
+      color: #666666;
+      font-size: 1.5rem;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+    .popup-body {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #444444;
+    }
+
+    .popup-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    .popup-button {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .popup-button.cancel {
+      background-color: #f1f1f1;
+      color: #666666;
+    }
+
+    .popup-button.cancel:hover {
+      background-color: #e1e1e1;
+    }
+
+    .popup-button.confirm {
+      background-color: #0000FF;
+      color: white;
+      font-weight: 600;
+    }
+
+    .popup-button.confirm:hover {
+      background-color: #0000cc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 255, 0.2);
+    }
+    
+    /* From Uiverse.io by reglobby */ 
+    .user-profile {
+      width: 131px;
+      height: 51px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      background: linear-gradient(
+        to bottom right,
+        #2e8eff 0%,
+        rgba(46, 142, 255, 0) 30%
+      );
+      background-color: rgba(46, 142, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-profile:hover,
+    .user-profile:focus {
+      background-color: rgba(46, 142, 255, 0.7);
+      box-shadow: 0 0 10px rgba(46, 142, 255, 0.5);
+      outline: none;
+    }
+
+    .user-profile-inner {
+      width: 127px;
+      height: 47px;
+      border-radius: 13px;
+      background-color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .user-profile-inner svg {
+      width: 27px;
+      height: 27px;
+      fill: #fff;
+    }
+
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-[#1c1c0d] dark:text-white transition-colors duration-200">
+  <div class="flex-1 flex items-center justify-center p-4">
+    <div>
+      <div class="input__container">
+        <label class="input__label">Name</label>
+        <input placeholder="Enter your name" class="input" name="text" type="text">
+        <p class="input__description">What do you want to call yourself?</p>
+      </div>
+      
+      <!-- Go Button -->
+      <div class="flex justify-center mt-6">
+        <div
+          aria-label="User Login Button"
+          tabindex="0"
+          role="button"
+          class="user-profile"
+          id="goBtn"
+        >
+          <div class="user-profile-inner">
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g data-name="Layer 2" id="Layer_2">
+                <path
+                  d="m15.626 11.769a6 6 0 1 0 -7.252 0 9.008 9.008 0 0 0 -5.374 8.231 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 9.008 9.008 0 0 0 -5.374-8.231zm-7.626-4.769a4 4 0 1 1 4 4 4 4 0 0 1 -4-4zm10 14h-12a1 1 0 0 1 -1-1 7 7 0 0 1 14 0 1 1 0 0 1 -1 1z"
+                ></path>
+              </g>
+            </svg>
+            <p>Go</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Newton's Cradle Animation Overlay -->
+  <div class="animation-overlay" id="animationOverlay">
+    <div class="animation-content">
+      <div class="newtons-cradle">
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+      </div>
+      <div class="animation-text">Loading dashboard...</div>
+    </div>
+  </div>
+  
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <div class="popup-header">
+        <div class="popup-title">Name Required</div>
+        <button class="popup-close">&times;</button>
+      </div>
+      <div class="popup-body">Please enter your name before proceeding.</div>
+      <div class="popup-footer">
+        <button class="popup-button confirm">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Security measures - Prevent right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    
+    // Security measures - Prevent common keyboard shortcuts for saving
+    document.addEventListener('keydown', function(e) {
+      // Prevent Ctrl+S (Save)
+      if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        return false;
+      }
+      // Prevent Ctrl+Shift+I (Developer Tools)
+      if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+      }
+      // Prevent Ctrl+U (View Source)
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+      }
+      // Prevent F12 (Developer Tools)
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+    // Ensure input elements maintain rounded corners
+    window.addEventListener('load', function() {
+      const container = document.querySelector('.input__container');
+      const input = document.querySelector('.input');
+      
+      if (container) {
+        container.style.borderRadius = '30px';
+      }
+      
+      if (input) {
+        input.style.borderRadius = '30px';
+      }
+    });
+    
+    // Handle Go button click
+    document.addEventListener('DOMContentLoaded', function() {
+      const goBtn = document.getElementById('goBtn');
+      if (goBtn) {
+        goBtn.addEventListener('click', function() {
+          // Get the name input value
+          const nameInput = document.querySelector('.input');
+          const name = nameInput ? nameInput.value.trim() : '';
+          
+          // Validate that a name is entered
+          if (!name) {
+            // Show modern popup if no name is entered
+            showPopup('Please enter your name before proceeding.', 'Name Required');
+            return;
+          }
+          
+          // Save the name to localStorage
+          localStorage.setItem('userName', name);
+          
+          // Show the animation overlay
+          const animationOverlay = document.getElementById('animationOverlay');
+          if (animationOverlay) {
+            animationOverlay.style.display = 'flex';
+          }
+          
+          // Redirect to dashboard after 3 seconds
+          setTimeout(function() {
+            window.location.href = 'dashboard.html';
+          }, 3000);
+        });
+      }
+    });
+
+    // Show modern popup function
+    function showPopup(message, title) {
+      // Remove any existing popup
+      const existingPopup = document.querySelector('.popup-overlay');
+      if (existingPopup) {
+        document.body.removeChild(existingPopup);
+      }
+      
+      // Create popup elements
+      const popupOverlay = document.createElement('div');
+      popupOverlay.className = 'popup-overlay';
+      
+      const popupContent = document.createElement('div');
+      popupContent.className = 'popup-content';
+      
+      const popupHeader = document.createElement('div');
+      popupHeader.className = 'popup-header';
+      
+      const popupTitle = document.createElement('div');
+      popupTitle.className = 'popup-title';
+      popupTitle.textContent = title;
+      
+      const popupClose = document.createElement('button');
+      popupClose.className = 'popup-close';
+      popupClose.innerHTML = '&times;';
+      
+      const popupBody = document.createElement('div');
+      popupBody.className = 'popup-body';
+      popupBody.textContent = message;
+      
+      const popupFooter = document.createElement('div');
+      popupFooter.className = 'popup-footer';
+      
+      const confirmButton = document.createElement('button');
+      confirmButton.className = 'popup-button confirm';
+      confirmButton.textContent = 'OK';
+      
+      // Assemble popup
+      popupHeader.appendChild(popupTitle);
+      popupHeader.appendChild(popupClose);
+      popupFooter.appendChild(confirmButton);
+      popupContent.appendChild(popupHeader);
+      popupContent.appendChild(popupBody);
+      popupContent.appendChild(popupFooter);
+      popupOverlay.appendChild(popupContent);
+      document.body.appendChild(popupOverlay);
+      
+      // Show popup
+      popupOverlay.style.display = 'flex';
+      
+      // Close popup events
+      popupClose.addEventListener('click', function() {
+        document.body.removeChild(popupOverlay);
+      });
+      
+      confirmButton.addEventListener('click', function() {
+        document.body.removeChild(popupOverlay);
+      });
+      
+      popupOverlay.addEventListener('click', function(e) {
+        if (e.target === popupOverlay) {
+          document.body.removeChild(popupOverlay);
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Dashboard</title>
+  <link rel="icon" type="image/png" href="https://ik.imagekit.io/onr1ufd7e/Black%20and%20White%20Initial%20Z%20Corporate%20Logo%20(4)-Photoroom.png?updatedAt=1764829551324">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0000FF", /* Changed to pure blue */
+            "background-light": "#212121", /* Updated to requested color */
+            "background-dark": "#212121", /* Updated to requested color */
+          },
+          fontFamily: {
+            "display": ["Spline Sans", "sans-serif"],
+            "body": ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+  <style>
+    /* Security measures - Prevent image downloading */
+    img {
+      /* Prevent right-click context menu */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Prevent image dragging */
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+      /* Prevent image saving via context menu */
+      pointer-events: none;
+    }
+    
+    /* Prevent text selection */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Prevent image dragging */
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+    }
+    
+    /* Welcome message */
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .welcome-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+    
+    .welcome-name {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #4d9bff;
+      margin-bottom: 2rem;
+    }
+    
+    .welcome-message {
+      font-size: 1.2rem;
+      color: #a8a898;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-[#1c1c0d] dark:text-white transition-colors duration-200">
+    <div class="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+          Welcome to Your Dashboard
+        </h1>
+        <div class="mb-8">
+          <p class="text-2xl text-indigo-400 font-semibold" id="userNameDisplay"></p>
+        </div>
+        <p class="text-lg text-gray-300 max-w-md mx-auto">
+          This is your personalized dashboard. More features will be added here soon.
+        </p>
+      </div>
+    </div>
+  
+  <script>
+    // Security measures - Prevent right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    
+    // Get the user's name from localStorage and display it
+    document.addEventListener('DOMContentLoaded', function() {
+      const userNameElement = document.getElementById('userNameDisplay');
+      const savedName = localStorage.getItem('userName');
+      if (userNameElement && savedName) {
+        userNameElement.textContent = savedName;
+      }
+    });
+    
+    // Security measures - Prevent common keyboard shortcuts for saving
+    document.addEventListener('keydown', function(e) {
+      // Prevent Ctrl+S (Save)
+      if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        return false;
+      }
+      // Prevent Ctrl+Shift+I (Developer Tools)
+      if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+      }
+      // Prevent Ctrl+U (View Source)
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+      }
+      // Prevent F12 (Developer Tools)
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    });
+  </script>
+</body>
+</html>
